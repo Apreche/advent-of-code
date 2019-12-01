@@ -1,4 +1,4 @@
-# advent2016
-My solutions for Advent of Code 2016
+# advent-of-code
+My solutions for Advent of Code
 
-http://adventofcode.com/2016
+http://adventofcode.com/
