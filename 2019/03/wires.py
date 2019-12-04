@@ -29,7 +29,7 @@ def make_wire(instructions):
             )
             locations.append(new_location)
             current_location = new_location
-    return set(locations)
+    return locations
 
 if __name__ == "__main__":
     with open('input.txt', 'r') as input_file:
@@ -44,3 +44,11 @@ if __name__ == "__main__":
         distances.append(manhattan_distance(intersection))
     shortest = sorted(distances)[0]
     print(f"Distance to closest intersection: {shortest}")
+
+    distances = []
+    for intersection in intersections:
+        a_steps = wire_a.index(intersection) + 1
+        b_steps = wire_b.index(intersection) + 1
+        distances.append(a_steps + b_steps)
+    shortest = sorted(distances)[0]
+    print(f"Combined steps to intersection: {shortest}")
