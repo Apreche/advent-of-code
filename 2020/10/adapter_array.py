@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 def parse_input_file(filename: str):
 
     with open(filename) as input_file:
@@ -19,6 +20,38 @@ def count_jolt_jumps(adapters):
     return jumps
 
 
+def jolt_jump_sequence(adapters):
+    adapters.insert(0, 0)
+    current_joltage = 0
+    jumps = []
+    for adapter in adapters:
+        jumps.append(adapter - current_joltage)
+        current_joltage = adapter
+    return jumps
+
+
+def ones_in_a_row(sequence):
+    sequence.append(3)
+    ones_in_a_row = []
+    current_count = 0
+    for x in sequence:
+        if x == 1:
+            current_count += 1
+        else:
+            ones_in_a_row.append(current_count)
+            current_count = 0
+    return ones_in_a_row
+
+
+def count_possibilities(chains):
+    lookup = [1, 1, 2, 4, 7]
+    possibilities = 1
+    for chain in chains:
+        times = lookup[chain]
+        possibilities *= times
+    return possibilities
+
+
 def main():
     parsed_input = parse_input_file("input.txt")
     jumps = count_jolt_jumps(parsed_input)
@@ -26,7 +59,9 @@ def main():
 
     print(f"Part 1: {part_1_result}")
 
-    part_2_result = None
+    sequence = jolt_jump_sequence(parsed_input)
+    one_chains = ones_in_a_row(sequence)
+    part_2_result = count_possibilities(one_chains)
     print(f"Part 2: {part_2_result}")
 
 
