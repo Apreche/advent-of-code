@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# (is_seat, is_occupied)
+# Seat structure = (is_seat, is_occupied)
 
 def parse_input_file(filename: str):
 
@@ -46,7 +46,47 @@ def adjacency_count(seating_area, row, col):
     return adjacencies
 
 
-def process_rules(seating_area):
+def see_count(seating_area, row, col):
+
+    min_row = 0
+    min_col = 0
+    max_row = len(seating_area) - 1
+    max_col = len(seating_area[0]) - 1
+
+    vectors = [
+        (1, 0),
+        (-1, 0),
+        (0, 1),
+        (0, -1),
+        (1, 1),
+        (-1, -1),
+        (-1, 1),
+        (1, -1)
+    ]
+
+    num_seen = 0
+    for vx, vy in vectors:
+        x, y = row, col
+        while True:
+            x += vx
+            y += vy
+            x_oob = (x < min_row) or (x > max_row)
+            y_oob = (y < min_col) or (y > max_col)
+            if x_oob or y_oob:
+                break
+            is_seat, is_occupied = seating_area[x][y]
+            if is_occupied:
+                num_seen += 1
+            if is_seat:
+                break
+    return num_seen
+
+
+def process_rules(
+    seating_area,
+    method=adjacency_count,
+    adj_limit=4,
+):
     num_changes = 0
     new_seating_area = []
     for row_num, row in enumerate(seating_area):
@@ -56,13 +96,13 @@ def process_rules(seating_area):
             if not is_seat:
                 new_row.append(spot)
                 continue
-            num_adjacencies = adjacency_count(
+            num_adjacencies = method(
                 seating_area, row_num, col_num
             )
             if (not is_occupied) and (num_adjacencies == 0):
                 new_row.append((True, True))
                 num_changes += 1
-            elif is_occupied and (num_adjacencies >= 4):
+            elif is_occupied and (num_adjacencies >= adj_limit):
                 new_row.append((True, False))
                 num_changes += 1
             else:
@@ -80,11 +120,15 @@ def count_occupied_seats(seating_area):
     return occupied
 
 
-def part_1_process(seating_area):
+def process_result(
+    seating_area,
+    method=adjacency_count,
+    adj_limit=4
+):
     num_changes = None
     while num_changes != 0:
         num_changes, new_seating_area = process_rules(
-            seating_area
+            seating_area, method, adj_limit
         )
         seating_area = new_seating_area
     return count_occupied_seats(seating_area)
@@ -108,10 +152,14 @@ def print_seating_area(seating_area):
 def main():
     original_seating_area = parse_input_file("input.txt")
 
-    part_1_result = part_1_process(original_seating_area)
+    part_1_result = process_result(
+        original_seating_area, adjacency_count, 4
+    )
     print(f"Part 1: {part_1_result}")
 
-    part_2_result = None
+    part_2_result = process_result(
+        original_seating_area, see_count, 5
+    )
     print(f"Part 2: {part_2_result}")
 
 
