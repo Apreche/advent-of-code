@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# import math
+
+
 def parse_input_file(filename: str):
 
     with open(filename) as input_file:
@@ -13,6 +16,7 @@ def parse_input_file(filename: str):
 
 
 START_POSITION = (0, 0)
+START_WAYPOINT = (10, 1)
 
 START_FACING = 'E'
 
@@ -83,15 +87,81 @@ def follow_directions(instructions):
     return current_position
 
 
+def left_rotate(point):
+    x, y = point
+    return (-1 * y, x)
+
+
+def right_rotate(point):
+    x, y = point
+    return (y, -1 * x)
+
+
+def rotate_waypoint(
+    current_waypoint,
+    direction,
+    degree
+):
+    num_swaps = int(degree / 90)
+    new_waypoint = current_waypoint
+    for x in range(num_swaps):
+        if direction == 'L':
+            new_waypoint = left_rotate(new_waypoint)
+        else:
+            new_waypoint = right_rotate(new_waypoint)
+    return new_waypoint
+
+
+def move_to_waypoint(
+    current_position,
+    current_waypoint,
+    times
+):
+    vx, vy = current_waypoint
+    vx *= times
+    vy *= times
+    x, y = current_position
+    return (x + vx, y + vy)
+
+
+def follow_correct_directions(instructions):
+    current_position = START_POSITION
+    current_waypoint = START_WAYPOINT
+
+    for instruction, distance in instructions:
+        if instruction in DIRECTIONS:
+            current_waypoint = move(
+                current_waypoint,
+                instruction,
+                distance
+            )
+        elif instruction in ROTATIONS:
+            current_waypoint = rotate_waypoint(
+                current_waypoint,
+                instruction,
+                distance
+            )
+        else:  # Must be F
+            current_position = move_to_waypoint(
+                current_position,
+                current_waypoint,
+                distance
+            )
+    return current_position
+
+
 def main():
     parsed_input = parse_input_file("input.txt")
-    final_position = follow_directions(parsed_input)
+    part_1_position = follow_directions(parsed_input)
     part_1_result = manhattan_distance(
-        START_POSITION, final_position
+        START_POSITION, part_1_position
     )
     print(f"Part 1: {part_1_result}")
 
-    part_2_result = None
+    part_2_position = follow_correct_directions(parsed_input)
+    part_2_result = manhattan_distance(
+        START_POSITION, part_2_position
+    )
     print(f"Part 2: {part_2_result}")
 
 
