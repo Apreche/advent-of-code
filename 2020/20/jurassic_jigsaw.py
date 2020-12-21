@@ -81,6 +81,22 @@ def part_one_solution(lone_edge_count):
     return math.prod(corner_tiles)
 
 
+"""
+def assemble_puzzle(
+    edge_counts,
+    tileset_with_edges,
+):
+    corner_tile = [x for x, y in lone_edge_count.items() if y == 2][0]
+    puzzle = []
+    puzzle_size = 1
+    while puzzle_size < len(tileset_with_edges):
+        if not puzzle:
+            row = [corner_tile]
+        else:
+            row = []
+"""
+
+
 def main():
     all_tiles = parse_input_file("input.txt")
     tileset_with_edges = process_edges(all_tiles)
