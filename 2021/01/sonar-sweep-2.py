@@ -2,6 +2,7 @@
 
 import os
 
+
 def parse_input_file(filename: str):
     current_dir = os.path.dirname(__file__)
     full_file_path = os.path.join(current_dir, filename)
@@ -11,6 +12,7 @@ def parse_input_file(filename: str):
         for line in input_file.read().splitlines():
             parsed_input.append(int(line))
     return parsed_input
+
 
 def get_num_depth_increases(depths):
     num_increases = 0
@@ -22,10 +24,11 @@ def get_num_depth_increases(depths):
         current_val = depth
     return num_increases
 
+
 def rolling_avg_increases(depths, window_size=3):
     num_increases = 0
     previous_window_sum = None
-    for i in range(0,len(depths)-(window_size - 1)):
+    for i in range(0, len(depths)-(window_size - 1)):
         current_window_sum = sum(depths[i:i+window_size])
         if previous_window_sum is not None:
             if current_window_sum > previous_window_sum:

@@ -2,6 +2,7 @@
 
 import os
 
+
 def parse_input_file(filename: str):
     current_dir = os.path.dirname(__file__)
     full_file_path = os.path.join(current_dir, filename)
@@ -11,6 +12,7 @@ def parse_input_file(filename: str):
         for line in input_file.read().splitlines():
             parsed_input.append(int(line))
     return parsed_input
+
 
 def get_num_depth_increases(depths):
     num_increases = 0
