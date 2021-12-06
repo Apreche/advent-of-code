@@ -2,11 +2,11 @@
 
 import os
 
+
 def parse_input_file(filename: str):
     current_dir = os.path.dirname(__file__)
     full_file_path = os.path.join(current_dir, filename)
     with open(full_file_path) as input_file:
-
         parsed_input = []
         for line in input_file.read().splitlines():
             parsed_input.append(line)
