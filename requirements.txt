@@ -1,1 +1,2 @@
+bitarray==2.3.4
 fish==1.1
