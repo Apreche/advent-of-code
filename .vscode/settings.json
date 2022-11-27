@@ -16,6 +16,10 @@
         "zsh": null,
         "JavaScript Debug Terminal": null
     },
+    "terminal.integrated.defaultProfile.linux": "ipython",
+    "terminal.integrated.automationProfile.linux": {
+        "path": "bash"
+    },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8",
         "editor.formatOnSave": true,
