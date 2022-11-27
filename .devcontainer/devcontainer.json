@@ -1,0 +1,12 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"extensions": [
+		"ms-python.flake8",
+		"ms-python.autopep8",
+		"ms-python.python",
+		"ms-python.vscode-pylance"
+	]
+}
