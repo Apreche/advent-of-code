@@ -3,6 +3,9 @@
 		"dockerfile": "Dockerfile",
 		"context": ".."
 	},
+	"containerEnv": {
+		"PYTHONDONTWRITEBYTECODE": "1"
+	},
 	"extensions": [
 		"ms-python.flake8",
 		"ms-python.autopep8",
