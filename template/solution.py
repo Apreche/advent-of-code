@@ -14,7 +14,7 @@ def parse_input_file(filename: str):
 
 
 def main():
-    parsed_input = parse_input_file("test_input.txt")
+    parsed_input = parse_input_file("input.txt")
     print(parsed_input)
 
     part_1_result = None
