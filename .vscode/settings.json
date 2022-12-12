@@ -6,7 +6,10 @@
             "args": [
                 "--no-confirm-exit",
                 "--no-banner",
-                "--pprint"
+                "--pprint",
+                "--ext=autoreload",
+                "-c=%autoreload 2",
+                "-i"
             ]
         },
         "bash": {
