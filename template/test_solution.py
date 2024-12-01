@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from . import solution
+import solution
 
 
 class TestSolution(unittest.TestCase):
