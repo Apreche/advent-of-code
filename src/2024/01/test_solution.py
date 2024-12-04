@@ -1,24 +1,21 @@
 #!/usr/bin/env python
 
 import unittest
-import solution
+from . import solution
 
 
 class TestSolution(unittest.TestCase):
-
-    correct_left_list = [3,4,2,1,3,3]
-    correct_right_list = [4,3,5,3,9,3]
+    correct_left_list = [3, 4, 2, 1, 3, 3]
+    correct_right_list = [4, 3, 5, 3, 9, 3]
     correct_tuple_list = [
-        (1,3),
-        (2,3),
-        (3,3),
-        (3,4),
-        (3,5),
-        (4,9),
+        (1, 3),
+        (2, 3),
+        (3, 3),
+        (3, 4),
+        (3, 5),
+        (4, 9),
     ]
-    correct_distance_list = [
-        2, 1, 0, 1, 2, 5
-    ]
+    correct_distance_list = [2, 1, 0, 1, 2, 5]
 
     def test_input_to_lists(self):
         id_lists = solution.parse_input_file("test_input.txt")
@@ -27,7 +24,9 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(right_list, self.correct_right_list)
 
     def test_lists_to_sorted_tuples(self):
-        result = solution.lists_to_sorted_tuples(self.correct_left_list, self.correct_right_list)
+        result = solution.lists_to_sorted_tuples(
+            self.correct_left_list, self.correct_right_list
+        )
         self.assertEqual(result, self.correct_tuple_list)
 
     def test_distance(self):
@@ -45,12 +44,17 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(result, self.correct_distance_list)
 
     def test_total_list_distance(self):
-        result = solution.total_list_distance(self.correct_left_list, self.correct_right_list)
+        result = solution.total_list_distance(
+            self.correct_left_list, self.correct_right_list
+        )
         self.assertEqual(result, 11)
 
     def test_similarity_score(self):
-        score = solution.similarity_score(self.correct_left_list, self.correct_right_list)
+        score = solution.similarity_score(
+            self.correct_left_list, self.correct_right_list
+        )
         self.assertEqual(score, 31)
+
 
 if __name__ == "__main__":
     unittest.main()

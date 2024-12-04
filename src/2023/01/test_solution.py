@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
 import unittest
-import solution
+from . import solution
 
 
 class TestSolution(unittest.TestCase):
-
     def test_1(self):
         calibration_data = solution.parse_input_file("test_input.txt")
         test_result = solution.sum_calibration_values(calibration_data)
